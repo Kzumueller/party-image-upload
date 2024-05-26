@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import {Layout, Menu} from "antd";
+import {Layout, Menu, Row} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
+import { AntdRegistry } from '@ant-design/nextjs-registry';
+import {MainNavigation} from "@/components/navigation/MainNavigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Party Image Upload",
-  description: "Upload images of the party at the party",
+  title: "Party Image UploadManager",
+  description: "UploadManager images of the party at the party",
 };
 
 export default function RootLayout({
@@ -19,23 +21,21 @@ export default function RootLayout({
   return (
     <html lang="de">
         <body>
-        <Layout className="w-full h-lvh">
-            <Header className="w-full">
-                <Menu
-                    mode="horizontal"
-                    theme="dark"
-                    defaultSelectedKeys={["upload"]}
-                    items={[
-                        { key: "upload", label: "Upload" },
-                        { key: "gallery", label: "Galerie" },
-                    ]}
-                />
-            </Header>
-            <Content className="p-5">
-                {children}
-            </Content>
-            <Footer></Footer>
-        </Layout>
+        <AntdRegistry>
+            <Layout className="w-full !min-h-lvh">
+                <Header className="w-full">
+                    <div id="logo"></div>
+                    <MainNavigation />
+                </Header>
+                <Content className="p-5">
+                    {children}
+                </Content>
+                <Footer className="text-center">
+                    <Row justify="center">Rike 👰🏼🤵🏽 Andi</Row>
+                    <Row justify="center">20.07.2024</Row>
+                </Footer>
+            </Layout>
+        </AntdRegistry>
         </body>
     </html>
   );
