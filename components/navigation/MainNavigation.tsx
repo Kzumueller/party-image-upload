@@ -1,4 +1,5 @@
 import {Menu} from "antd";
+import Link from 'next/link'
 
 export const MainNavigation = () => {
     return <Menu
@@ -6,8 +7,8 @@ export const MainNavigation = () => {
         theme="dark"
         defaultSelectedKeys={["upload"]}
         items={[
-            { key: "upload", label: "Hochladen" },
-            { key: "gallery", label: "Galerie" },
+            { key: "upload", label: <Link href="/">Hochladen</Link> },
+            { key: "gallery", label: <Link href="/gallery">Galerie</Link> },
         ]}
     />
 }

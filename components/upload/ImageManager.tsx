@@ -82,7 +82,7 @@ export const ImageManager = () => {
                 {images.map(image => <Card key={image.id} className="shadow-md !mb-3">
                     <Row gutter={[10, 10]} align="middle" justify="space-between">
                         <Col>
-                            <Row justify="end"><CloseOutlined className="!text-red-600 cursor-pointer mb-3" onClick={() => removeImage(image.id)} /></Row>
+                            <Row justify="end"><CloseOutlined className="!color-primary cursor-pointer mb-3" onClick={() => removeImage(image.id)} /></Row>
                             <Row><Image src={image.preview} className="w-full max-w-lg mb-2" /></Row>
                             <SuperLine>{image.file.name}</SuperLine>
                             <Row>

@@ -6,6 +6,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --colour-primary: #A6553C;
+  --colour-secondary: #244123;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +26,22 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.bg-color-secondary {
+  background-color: var(--colour-secondary);
+}
+
+.\!bg-color-secondary {
+  background-color: var(--colour-secondary)!important;
+}
+
+.color-primary {
+  color: var(--colour-primary);
+}
+
+.\!color-primary {
+  color: var(--colour-primary)!important;
 }
 
 @layer utilities {
