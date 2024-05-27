@@ -2,10 +2,10 @@
 
 import {useCallback, useContext, useState} from "react";
 import {UploadContext} from "@/components/upload/UploadContextProvider";
-import {Button, Col, Row} from "antd";
+import {Button, Col, notification, Row} from "antd";
 import {UploaderName} from "@/components/upload/UploaderName";
 import {ImageManager} from "@/components/upload/ImageManager";
-import {addDoc, collection} from "firebase/firestore/lite";
+import {addDoc, collection} from "firebase/firestore";
 import {cloudStorage, firestore} from "@/lib/firebase/firebase";
 import {ref, uploadBytes} from "@firebase/storage";
 
@@ -27,10 +27,16 @@ export const UploadManager = () => {
             await addDoc(imageCollection, {
                 uploaderName,
                 path: imageRef.fullPath,
-                tags: tags[image.id]
+                tags: tags[image.id],
+                createdAt: new Date(),
+                updatedAt: new Date()
             });
 
             setUploading(false);
+
+            notification.success({
+                message: "Bilder erfolgreich hochgeladen!"
+            })
         }));
 
         setImages([]);

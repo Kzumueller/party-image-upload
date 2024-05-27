@@ -67,7 +67,7 @@ export const ImageManager = () => {
         <Row className="w-full mb-5" justify="center" align="middle">
             <input
                 ref={fileDialogueRef}
-                className="h-0"
+                className="h-0 w-0"
                 type="file"
                 accept=".jpg,.jpeg,.png,.ttif,.tif"
                 multiple
