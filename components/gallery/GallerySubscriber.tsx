@@ -18,8 +18,6 @@ export const GallerySubscriber = () => {
         setLoading
     } = useContext(GalleryContext);
 
-    const [unsubscribe, setUnsubscribe] = useState<() => void>(() => () => {});
-
     const constraints = useMemo(() => [
         ...(uploaderName ? [where("uploaderName", "==", uploaderName)] : []),
         ...(tag ? [where("tags", "array-contains", tag)] : []),
@@ -33,7 +31,7 @@ export const GallerySubscriber = () => {
 
     /** Subscription effect */
     useEffect(() => {
-        const newUnsubscribe = onSnapshot(imageQuery, snapshot => {
+        const unsubscribe = onSnapshot(imageQuery, snapshot => {
             const images: Image[] = []
             const tags: string[] = [];
             const uploaderNames: string[] = [];
@@ -64,9 +62,7 @@ export const GallerySubscriber = () => {
             setLoading(false);
         }, error => console.error(error));
 
-        //setUnsubscribe(newUnsubscribe);
-
-        return newUnsubscribe;
+        return unsubscribe;
     }, [imageQuery, setTags, setUploaderNames, setImages]);
 
     return <></>;
