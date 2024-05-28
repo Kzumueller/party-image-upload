@@ -2,7 +2,7 @@
 
 import { UploadFile } from "antd"
 import {createContext, ReactNode, useState} from "react"
-import {ManagedFile} from "@/components/upload/addPreviewDataURL";
+import {ManagedFile} from "@/components/upload/processImageFile";
 
 export type Upload = {
     uploaderName: string;

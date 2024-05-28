@@ -2,7 +2,7 @@
 
 import {useContext, useEffect, useMemo, useState} from "react";
 import {GalleryContext, Image} from "@/components/gallery/GalleryContextProvider";
-import {collection, query, where, orderBy, onSnapshot, getDocs} from "firebase/firestore";
+import {collection, query,  where, orderBy, onSnapshot, getDocs, limit} from "firebase/firestore";
 import {firestore} from "@/lib/firebase/firebase";
 
 export const GallerySubscriber = () => {
@@ -12,15 +12,20 @@ export const GallerySubscriber = () => {
         setTags,
         uploaderName,
         tag,
-        sort
+        uploaderNames: savedUploaderNames,
+        tags: savedTags,
+        sort,
+        setLoading
     } = useContext(GalleryContext);
 
     const [unsubscribe, setUnsubscribe] = useState<() => void>(() => () => {});
 
     const constraints = useMemo(() => [
         ...(uploaderName ? [where("uploaderName", "==", uploaderName)] : []),
-        ...(tag ? [where("tags", "==", tag)] : []),
-        orderBy(sort.by, sort.direction)
+        ...(tag ? [where("tags", "array-contains", tag)] : []),
+        orderBy(sort.by, sort.direction),
+        limit(10),
+
     ], [uploaderName, tag]);
 
     const imageCollection = useMemo(() => collection(firestore, "images"), []);
@@ -28,27 +33,35 @@ export const GallerySubscriber = () => {
 
     /** Subscription effect */
     useEffect(() => {
-        console.log("calling onSnapshot");
-
-        // unsubscribe the earlier listener first
-        //if (typeof unsubscribe === "function") unsubscribe();
-
-        const images: Image[] = []
-        const tags: string[] = [];
-        const uploaderNames: string[] = [];
-
         const newUnsubscribe = onSnapshot(imageQuery, snapshot => {
-            snapshot.forEach(doc => {
+            const images: Image[] = []
+            const tags: string[] = [];
+            const uploaderNames: string[] = [];
+
+            const unfiltered = !tag && !uploaderName;
+
+            snapshot.docs.forEach(doc => {
                 const image = { ...doc.data(), id: doc.id } as Image;
 
-                tags.push(...image.tags);
-                uploaderNames.push(image.uploaderName);
+                if(unfiltered) {
+                    tags.push(...image.tags);
+                    uploaderNames.push(image.uploaderName);
+                }
+
                 images.push(image);
             });
 
-            setTags(Array.from(new Set(...tags)));
-            setUploaderNames(Array.from(new Set(...uploaderNames)))
+            if(unfiltered) {
+                const newTags = Array.from(new Set(tags));
+
+                setTags(newTags);
+
+                const names = Array.from(new Set(uploaderNames));
+                setUploaderNames(names)
+            }
+
             setImages(images);
+            setLoading(false);
         }, error => console.error(error));
 
         //setUnsubscribe(newUnsubscribe);

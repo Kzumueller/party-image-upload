@@ -1,11 +1,11 @@
 "use client"
 
 import {useCallback, useContext, useMemo, useRef, useState} from "react";
-import {Button, Card, Col, Image, Row, Select, Spin, Upload, UploadFile} from "antd";
+import {Button, Card, Col, Row, Select} from "antd";
 import {CloseOutlined, FileImageOutlined} from "@ant-design/icons";
 import {SuperLine} from "@/components/SuperLine";
 import {UploadContext} from "@/components/upload/UploadContextProvider";
-import {addPreviewDataURL} from "@/components/upload/addPreviewDataURL";
+import {processImageFile} from "@/components/upload/processImageFile";
 
 const presetTags = [
     "Braut",
@@ -52,7 +52,7 @@ export const ImageManager = () => {
         setImages([]);
         setTags({});
 
-        const newFileList = await Promise.all(Array.from(images).map(addPreviewDataURL))
+        const newFileList = await Promise.all(Array.from(images).map(processImageFile))
 
         setImages(newFileList);
         setParsing(false);
@@ -83,7 +83,7 @@ export const ImageManager = () => {
                     <Row gutter={[10, 10]} align="middle" justify="space-between">
                         <Col>
                             <Row justify="end"><CloseOutlined className="!color-primary cursor-pointer mb-3" onClick={() => removeImage(image.id)} /></Row>
-                            <Row><Image src={image.preview} className="w-full max-w-lg mb-2" /></Row>
+                            <Row><img src={image.preview} className="w-full max-w-lg mb-2" /></Row>
                             <SuperLine>{image.file.name}</SuperLine>
                             <Row>
                                 <Select

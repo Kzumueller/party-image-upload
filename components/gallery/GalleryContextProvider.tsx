@@ -4,9 +4,11 @@ import {createContext, ReactNode, useState} from "react"
 import {Timestamp} from "@firebase/firestore";
 
 export type Image = {
-    id: string;
+    id?: string;
     uploaderName: string;
-    path: string;
+    fullSizePath: string;
+    previewPath: string;
+    fileExtension: string;
     tags: string[];
     createdAt: Timestamp;
     updatedAt: Timestamp;
@@ -30,12 +32,14 @@ export type GalleryState = {
     setTags: (tags: string[]) => void;
     sort: Sort;
     setSort: (sort: Sort) => void;
+    loading: boolean,
+    setLoading: (bool: boolean) => void
 };
 
 export const GalleryContext = createContext<GalleryState>({
     images: [],
     setImages: () => {},
-    uploaderName: "",
+    uploaderName: "defaultValue",
     setUploaderName: () => {},
     uploaderNames: [],
     setUploaderNames: () => {},
@@ -45,6 +49,8 @@ export const GalleryContext = createContext<GalleryState>({
     setTags: () => {},
     sort: { by: "createdAt", direction: "desc" },
     setSort: () => {},
+    loading: false,
+    setLoading: () => {}
 })
 
 export const GalleryContextProvider = ({children}: { children: ReactNode }) => {
@@ -54,6 +60,7 @@ export const GalleryContextProvider = ({children}: { children: ReactNode }) => {
     const [tag, setTag] = useState<string>("");
     const [tags, setTags] = useState<string[]>([]);
     const [sort, setSort] = useState<Sort>({ by: "createdAt", direction: "desc" });
+    const [loading, setLoading] = useState<boolean>(true);
 
     return <GalleryContext.Provider value={{
         images,
@@ -68,5 +75,7 @@ export const GalleryContextProvider = ({children}: { children: ReactNode }) => {
         setTags,
         sort,
         setSort,
+        loading,
+        setLoading
     }}>{children}</GalleryContext.Provider>
 }

@@ -12,7 +12,7 @@ export const UploaderName = () => {
     } = useContext(UploadContext);
 
     useEffect(() => {
-        localStorage.setItem("uploaderName", uploaderName);
+        if (uploaderName !== "") localStorage.setItem("uploaderName", uploaderName);
     }, [uploaderName])
 
     return <>
