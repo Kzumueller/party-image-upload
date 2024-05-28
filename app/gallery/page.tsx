@@ -6,9 +6,6 @@ import {GalleryFilterBar} from "@/components/gallery/GalleryFilterBar";
 import {GalleryPanel} from "@/components/gallery/GalleryPanel";
 
 export default function GalleryPage() {
-
-    console.log('rendering GalleryPage');
-
     return <GalleryContextProvider>
         <GallerySubscriber />
 
