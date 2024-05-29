@@ -1,8 +1,8 @@
 "use client"
 
-import {useContext, useEffect, useMemo, useState} from "react";
+import {useContext, useEffect, useMemo} from "react";
 import {GalleryContext, Image} from "@/components/gallery/GalleryContextProvider";
-import {collection, query,  where, orderBy, onSnapshot, getDocs, limit} from "firebase/firestore";
+import {collection, getCountFromServer, onSnapshot, orderBy, query, where} from "firebase/firestore";
 import {firestore} from "@/lib/firebase/firebase";
 
 export const GallerySubscriber = () => {
@@ -10,10 +10,9 @@ export const GallerySubscriber = () => {
         setImages,
         setUploaderNames,
         setTags,
+        setTotal,
         uploaderName,
         tag,
-        uploaderNames: savedUploaderNames,
-        tags: savedTags,
         sort,
         setLoading
     } = useContext(GalleryContext);
@@ -21,17 +20,15 @@ export const GallerySubscriber = () => {
     const constraints = useMemo(() => [
         ...(uploaderName ? [where("uploaderName", "==", uploaderName)] : []),
         ...(tag ? [where("tags", "array-contains", tag)] : []),
-        orderBy(sort.by, sort.direction),
-        limit(10),
-
-    ], [uploaderName, tag]);
+        orderBy(sort.by, sort.direction)
+    ], [uploaderName, tag, sort]);
 
     const imageCollection = useMemo(() => collection(firestore, "images"), []);
-    const imageQuery = useMemo(() => query(imageCollection, ...constraints), [imageCollection, constraints])
+    const imageQuery = useMemo(() => query(imageCollection, ...constraints), [imageCollection, constraints]);
 
     /** Subscription effect */
     useEffect(() => {
-        const unsubscribe = onSnapshot(imageQuery, snapshot => {
+        return onSnapshot(imageQuery, snapshot => {
             const images: Image[] = []
             const tags: string[] = [];
             const uploaderNames: string[] = [];
@@ -50,19 +47,18 @@ export const GallerySubscriber = () => {
             });
 
             if(unfiltered) {
-                const newTags = Array.from(new Set(tags));
-
-                setTags(newTags);
-
-                const names = Array.from(new Set(uploaderNames));
-                setUploaderNames(names)
+                setTags(Array.from(new Set(tags)));
+                setUploaderNames(Array.from(new Set(uploaderNames)));
             }
+
+            getCountFromServer(imageCollection)
+                .then(snapshot => setTotal(snapshot.data().count))
 
             setImages(images);
             setLoading(false);
-        }, error => console.error(error));
-
-        return unsubscribe;
+        },
+                error => console.error(error)
+        );
     }, [imageQuery, setTags, setUploaderNames, setImages]);
 
     return <></>;

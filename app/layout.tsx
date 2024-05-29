@@ -6,6 +6,7 @@ import {Content, Footer, Header} from "antd/es/layout/layout";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import {MainNavigation} from "@/components/navigation/MainNavigation";
 import {Logo} from "@/components/navigation/Logo";
+import {AuthContextProvider} from "@/components/login/AuthContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,17 +33,19 @@ export default function RootLayout({
         <ConfigProvider theme={theme}>
             <AntdRegistry>
                 <Layout className="w-full !min-h-lvh">
-                    <Header className="flex items-center !pl-0">
-                        <Logo />
-                        <MainNavigation />
-                    </Header>
-                    <Content className="p-5">
-                        {children}
-                    </Content>
-                    <Footer className="text-center">
-                        <Row justify="center">Rike 👰🏼🤵🏽 Andi</Row>
-                        <Row justify="center">20.07.2024</Row>
-                    </Footer>
+                    <AuthContextProvider>
+                        <Header className="flex items-center !pl-0">
+                            <Logo />
+                            <MainNavigation />
+                        </Header>
+                        <Content className="p-5">
+                            {children}
+                        </Content>
+                        <Footer className="text-center">
+                            <Row justify="center">Rike 👰🏼🤵🏽 Andi</Row>
+                            <Row justify="center">20.07.2024</Row>
+                        </Footer>
+                    </AuthContextProvider>
                 </Layout>
             </AntdRegistry>
         </ConfigProvider>

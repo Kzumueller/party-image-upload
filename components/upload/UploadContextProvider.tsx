@@ -1,6 +1,5 @@
 "use client"
 
-import { UploadFile } from "antd"
 import {createContext, ReactNode, useState} from "react"
 import {ManagedFile} from "@/components/upload/processImageFile";
 

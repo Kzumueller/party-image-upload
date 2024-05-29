@@ -16,7 +16,7 @@ export const ImagePanel = ({ image }: Props) => {
 
     useEffect(() => {
         const imageRef = ref(cloudStorage, image.previewPath);
-        getDownloadURL(imageRef).then(setImageUrl)
+        getDownloadURL(imageRef).then(setImageUrl);
     }, []);
 
     return <div className="pt-2 pb-2 pl-1 pr-1 bg-white rounded-md max-w-lg">

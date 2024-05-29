@@ -12,7 +12,8 @@ const presetTags = [
     "Bräutigam",
     "Kirche",
     "Sektempfang",
-    "Saal"
+    "Saal",
+    "Photo Challenge"
 ]
 
 export const ImageManager = () => {
