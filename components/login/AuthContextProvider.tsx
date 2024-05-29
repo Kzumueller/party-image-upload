@@ -17,19 +17,25 @@ type Permissions = {
 type AuthState = {
     user: User | null;
     permissions: Permissions | null;
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
 }
 
 export const AuthContext = createContext<AuthState>({
     user: null,
-    permissions: null
+    permissions: null,
+    loading: true,
+    setLoading: () => {}
 });
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     const pathname = usePathname();
+    const [initialPathname] = useState(pathname);
     const router = useRouter();
 
     const [user, setUser] = useState<User | null>(null);
     const [permissions, setPermissions] = useState<Permissions | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     /**
      * fetches permissions for the given user and updates state for both
@@ -51,15 +57,26 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
                 setPermissions(permissions);
 
                 if(permissions && pathname === "/login") router.push("/");
-
-                if(!user && pathname !== "/login") router.push("/login");
+                else if(!permissions && pathname !== "/login") router.push("/login");
+                else setLoading(false);
             });
         })
     }, []);
 
+    /** detects real path changes */
+    useEffect(() => {
+        if(loading && pathname !== initialPathname) {
+            console.log({ pathname, initialPathname })
+            setLoading(false);
+        }
+        // no more next router events
+    }, [initialPathname, pathname]);
+
     return <AuthContext.Provider value={{
         user,
-        permissions
+        permissions,
+        loading,
+        setLoading
     }}>
         {children}
     </AuthContext.Provider>

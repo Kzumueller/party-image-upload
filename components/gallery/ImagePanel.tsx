@@ -1,5 +1,3 @@
-"use client"
-
 import {Image} from "@/components/gallery/GalleryContextProvider";
 import {Button, Col, Row, Skeleton, Tag} from "antd";
 import {SuperLine} from "@/components/SuperLine";
@@ -17,7 +15,7 @@ export const ImagePanel = ({ image }: Props) => {
     useEffect(() => {
         const imageRef = ref(cloudStorage, image.previewPath);
         getDownloadURL(imageRef).then(setImageUrl);
-    }, []);
+    }, [image.previewPath]);
 
     return <div className="pt-2 pb-2 pl-1 pr-1 bg-white rounded-md max-w-lg">
         <Col>

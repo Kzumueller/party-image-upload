@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type {Metadata} from "next";
+import {Inter} from "next/font/google";
 import "./globals.css";
-import {ConfigProvider, Layout, Menu, Row, ThemeConfig} from "antd";
+import {ConfigProvider, Layout, Row, ThemeConfig} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
-import { AntdRegistry } from '@ant-design/nextjs-registry';
+import {AntdRegistry} from '@ant-design/nextjs-registry';
 import {MainNavigation} from "@/components/navigation/MainNavigation";
 import {Logo} from "@/components/navigation/Logo";
 import {AuthContextProvider} from "@/components/login/AuthContextProvider";
+import {LoadingScreen} from "@/components/loadingScreen/LoadingScreen";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
             <AntdRegistry>
                 <Layout className="w-full !min-h-lvh">
                     <AuthContextProvider>
+                        <LoadingScreen />
                         <Header className="flex items-center !pl-0">
                             <Logo />
                             <MainNavigation />

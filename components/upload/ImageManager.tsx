@@ -84,7 +84,7 @@ export const ImageManager = () => {
                     <Row gutter={[10, 10]} align="middle" justify="space-between">
                         <Col>
                             <Row justify="end"><CloseOutlined className="!color-primary cursor-pointer mb-3" onClick={() => removeImage(image.id)} /></Row>
-                            <Row><img src={image.preview} className="w-full max-w-lg mb-2" /></Row>
+                            <Row justify="center"><img src={image.preview} className="w-full max-w-lg mb-2" /></Row>
                             <SuperLine>{image.file.name}</SuperLine>
                             <Row>
                                 <Select

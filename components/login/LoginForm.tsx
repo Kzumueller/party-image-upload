@@ -12,30 +12,31 @@ export const LoginForm = () => {
     const router = useRouter();
     const query = useSearchParams();
 
-    const { user } = useContext(AuthContext);
+    const { permissions, setLoading } = useContext(AuthContext);
 
     const [userPreset] = useState<boolean>(!!query.get("user"));
     const [email, setEmail] = useState(query.get("user") ?? "");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [signingIn, setSigningIn] = useState(false);
 
     const signIn = useCallback(async (email: string, password: string) => {
 
         try {
-            setLoading(true);
+            setSigningIn(true);
             await signInWithEmailAndPassword(fireAuth, email, password);
         } catch(error) {
             notification.error({
                 message: "Login fehlgeschlagen!"
             })
         } finally {
-            setLoading(false);
+            setSigningIn(false);
+            setLoading(true);
         }
     }, []);
 
     useEffect(() => {
-        if(user) router.push("/");
-    }, [router, user]);
+        if(permissions) router.push("/");
+    }, [router, permissions]);
 
     return <>
         <Title level={1} className="text-center">Login</Title>
@@ -65,7 +66,7 @@ export const LoginForm = () => {
                     <Col>
                         <Button
                             type="primary"
-                            loading={loading}
+                            loading={signingIn}
                             disabled={!email || !password}
                             onClick={() => signIn(email, password)}>
                             Login

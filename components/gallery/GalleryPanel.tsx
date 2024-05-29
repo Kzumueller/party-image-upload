@@ -9,22 +9,22 @@ import {pageSize} from "@/components/gallery/GalleryContextProvider";
 export const GalleryPanel = () => {
     const { images, page, setPage, total, loading } = useContext(GalleryContext);
 
-    if(loading) return <Skeleton loading active />
-
     return <>
         <Row
             wrap={true}
             gutter={[15, 15]}
             justify="center"
             align="middle">
-            {images
-                .slice((page - 1) * pageSize, page * pageSize)
-                .map(image =>
-                    <Col key={image.id}>
-                        <ImagePanel image={image}></ImagePanel>
-                    </Col>
-                )
-            }
+                <Skeleton className="max-w-96" loading={loading} active>
+                    {images
+                        .slice((page - 1) * pageSize, page * pageSize)
+                        .map(image =>
+                            <Col key={image.id}>
+                                <ImagePanel image={image}></ImagePanel>
+                            </Col>
+                        )
+                    }
+                </Skeleton>
         </Row>
 
         <Row justify="end">

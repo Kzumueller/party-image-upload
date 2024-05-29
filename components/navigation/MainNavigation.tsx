@@ -13,6 +13,7 @@ export const MainNavigation = () => {
     const items = useMemo(() => [
         ...(permissions?.upload ? [{ key: "/", label: <Link href="/">Hochladen</Link> }] : []),
         ...(permissions?.download ? [{ key: "/gallery", label: <Link href="/gallery">Galerie</Link> }] : []),
+        ...(permissions?.present ? [{ key: "/presentation", label: <Link href="/presentation">Präsentation</Link> }] : []),
         ],
         [permissions]);
 
