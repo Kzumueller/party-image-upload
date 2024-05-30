@@ -7,23 +7,11 @@ export type ManagedFile = {
 }
 
 /**
- * parses the given file and returns it as a data URL string
-  * @param file
- */
-export const parseFile = async (file: File): Promise<string> =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = (error) => reject(error);
-    });
-
-/**
  * Wraps the given file in a ManagedFile, adding a temporary id and a preview data URL
  * @param file
  */
 export const processImageFile = async (file: File): Promise<ManagedFile> => {
-    const fullSizedDataUrl = await parseFile(file);
+    const fullSizedDataUrl = URL.createObjectURL(file);
 
     return new Promise((resolve, reject) => {
         const img = document.createElement('img');

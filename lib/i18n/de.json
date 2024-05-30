@@ -33,6 +33,12 @@
     "present": "Präsentieren",
     "admin": "Admin",
     "Permissions": "Berechtigungen",
-    "Users": "Nutzer"
+    "Users": "Nutzer",
+    "QR Code": "QR Code",
+    "Close": "Schließen",
+    "Save Image": "Bild speichern",
+    "Create User": "Nutzer anlegen",
+    "Save": "Speichern",
+    "This user may:": "Dieser Nutzer darf:"
   }
 }

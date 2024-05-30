@@ -1,20 +1,21 @@
 "use client"
 
-import {useCallback, useContext, useMemo} from "react";
+import {useCallback, useContext, useMemo, useState} from "react";
 import {AdminContext, UserData} from "@/components/admin/AdminContextProvider";
 import {Button, Col, QRCode, Row, Table} from "antd";
 import {useTranslations} from "@/hooks/useTranslations";
 import {Permissions} from "@/components/login/AuthContextProvider";
 import {QrcodeOutlined} from "@ant-design/icons";
-import Title from "antd/es/typography/Title";
+import {QRCodeModal} from "@/components/admin/QRCodeModal";
 
 export const UsersTable = () => {
     const t = useTranslations();
-    const { users, loading } = useContext(AdminContext);
-
-    const createQRCode = useCallback(async (email: string) => {
-        
-    }, [])
+    const { 
+        users,
+        setSelectedUser,
+        setQrModalOpen,
+        loading 
+    } = useContext(AdminContext);
 
     const columns = useMemo(() => [
         {
@@ -35,20 +36,26 @@ export const UsersTable = () => {
         {
             key: "actions",
             render: (_: any, user: UserData) => <Col>
-                <Row><Button type="primary" icon={<QrcodeOutlined />}></Button></Row>
+                <Row>
+                    <Button
+                        type="primary"
+                        icon={<QrcodeOutlined />}
+                        onClick={() => {
+                            setSelectedUser(user);
+                            setQrModalOpen(true);
+                        }}
+                    />
+                </Row>
             </Col>
         }
-    ], [t]);
+    ], [setQrModalOpen, setSelectedUser, t]);
 
-    return <>
-        <Title level={1}>{t("Users")}</Title>
-        <Table
+    return <Table
             loading={loading}
             columns={columns}
             dataSource={users}
             pagination={{
                 hideOnSinglePage: true
             }}
-        />
-    </>
+        />;
 }
