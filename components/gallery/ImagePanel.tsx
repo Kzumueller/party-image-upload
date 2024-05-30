@@ -6,11 +6,14 @@ import {downloadImage} from "@/components/gallery/download/downloadImage";
 import {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "@firebase/storage";
 import {cloudStorage} from "@/lib/firebase/firebase";
+import {useTranslations} from "@/hooks/useTranslations";
 
 type Props = { image: Image };
 
 export const ImagePanel = ({ image }: Props) => {
+    const t = useTranslations();
     const [imageURL, setImageUrl] = useState("");
+    const [downloading, setDownloading] = useState(false);
 
     useEffect(() => {
         const imageRef = ref(cloudStorage, image.previewPath);
@@ -19,19 +22,22 @@ export const ImagePanel = ({ image }: Props) => {
 
     return <div className="pt-2 pb-2 pl-1 pr-1 bg-white rounded-md max-w-lg">
         <Col>
-            <Row justify="center" className="mb-2">
+            <Row justify="center" className="mb-2" style={{ minWidth: 300, minHeight: 170 }}>
                 <Skeleton style={{ width: 300, height: 170 }} title={false} active loading={!imageURL} paragraph={{ rows: 5 }}>
                     <img
                         className="max-w-full max-h-96"
                         //src={`https://firebasestorage.googleapis.com/v0/b/party-image-upload.appspot.com/o/${image.previewPath.replaceAll("/", "%2F")}?alt=media`}
                         src={imageURL}
-                        alt={`${image.uploaderName} um ${image.createdAt.toDate().toLocaleTimeString()}`}
+                        alt={image.createdAt.toDate().toLocaleTimeString()}
                     />
                 </Skeleton>
             </Row>
 
             <SuperLine>
-                {image.uploaderName} um {image.createdAt.toDate().toLocaleTimeString()}
+                {t("%name at %date")
+                    .replace("%name", image.uploaderName)
+                    .replace("%date", image.createdAt.toDate().toLocaleTimeString())
+                }
             </SuperLine>
 
             <Row gutter={[0, 5]} justify="space-between" align="middle" className="mb-1">
@@ -40,7 +46,11 @@ export const ImagePanel = ({ image }: Props) => {
                 </Col>
 
                 <Col>
-                    <Button icon={<DownloadOutlined/>} onClick={() => downloadImage(image)}></Button>
+                    <Button loading={downloading} icon={<DownloadOutlined/>} onClick={async () => {
+                        setDownloading(true);
+                        await downloadImage(image);
+                        setDownloading(false);
+                    }}></Button>
                 </Col>
             </Row>
         </Col>

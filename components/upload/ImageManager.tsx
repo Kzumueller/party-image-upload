@@ -6,6 +6,7 @@ import {CloseOutlined, FileImageOutlined} from "@ant-design/icons";
 import {SuperLine} from "@/components/SuperLine";
 import {UploadContext} from "@/components/upload/UploadContextProvider";
 import {processImageFile} from "@/components/upload/processImageFile";
+import {useTranslations} from "@/hooks/useTranslations";
 
 const presetTags = [
     "Braut",
@@ -17,6 +18,7 @@ const presetTags = [
 ]
 
 export const ImageManager = () => {
+    const t = useTranslations();
     const { images, setImages, tags, setTags } = useContext(UploadContext);
     const [parsing, setParsing] = useState(false);
 
@@ -75,7 +77,7 @@ export const ImageManager = () => {
                 onChange={(event) => parseImages(Array.from(event.target.files ?? []))}
 
             />
-            <Button icon={<FileImageOutlined />} loading={parsing} onClick={() => fileDialogueRef.current?.click()}>Bilder auswählen</Button>
+            <Button icon={<FileImageOutlined />} loading={parsing} onClick={() => fileDialogueRef.current?.click()}>{t("Select Images")}</Button>
         </Row>
 
         {!parsing && images.length > 0 && <Row>
@@ -90,7 +92,7 @@ export const ImageManager = () => {
                                 <Select
                                     className="w-full"
                                     mode="tags"
-                                    placeholder="Tags ..."
+                                    placeholder={t("Tags ...")}
                                     value={tags[image.id] ?? []}
                                     onSelect={tag => selectTag(image.id, tag)}
                                     onDeselect={tag => deselectTag(image.id, tag)}

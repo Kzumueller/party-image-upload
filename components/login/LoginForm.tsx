@@ -7,8 +7,10 @@ import {fireAuth} from "@/lib/firebase/firebase";
 import Title from "antd/es/typography/Title";
 import {useRouter, useSearchParams} from "next/navigation";
 import {AuthContext} from "@/components/login/AuthContextProvider";
+import {useTranslations} from "@/hooks/useTranslations";
 
 export const LoginForm = () => {
+    const t = useTranslations();
     const router = useRouter();
     const query = useSearchParams();
 
@@ -26,7 +28,7 @@ export const LoginForm = () => {
             await signInWithEmailAndPassword(fireAuth, email, password);
         } catch(error) {
             notification.error({
-                message: "Login fehlgeschlagen!"
+                message: t("Login failed")
             })
         } finally {
             setSigningIn(false);
@@ -39,12 +41,12 @@ export const LoginForm = () => {
     }, [router, permissions]);
 
     return <>
-        <Title level={1} className="text-center">Login</Title>
+        <Title level={1} className="text-center">{t("Login")}</Title>
         <Row justify="center">
             <Col className="!max-w-lg w-full">
                 {!userPreset && <Row className="mb-2">
                     <Input
-                        placeholder="E-Mail"
+                        placeholder={t("E-Mail")}
                         type="email"
                         value={email}
                         onChange={({target: {value}}) => setEmail(value)}
@@ -53,7 +55,7 @@ export const LoginForm = () => {
 
                 <Row className="mb-2">
                     <Input.Password
-                        placeholder="Passwort"
+                        placeholder={t("Password")}
                         type="password"
                         value={password}
 
@@ -69,7 +71,7 @@ export const LoginForm = () => {
                             loading={signingIn}
                             disabled={!email || !password}
                             onClick={() => signIn(email, password)}>
-                            Login
+                            {t("Login")}
                         </Button>
                     </Col>
                 </Row>

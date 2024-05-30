@@ -7,7 +7,7 @@ import {User} from "@firebase/auth-types";
 import {usePathname, useRouter} from "next/navigation";
 import {doc, getDoc} from "@firebase/firestore";
 
-type Permissions = {
+export type Permissions = {
     upload: boolean;
     download: boolean;
     present: boolean;

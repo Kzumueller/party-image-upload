@@ -4,8 +4,11 @@ import {useContext} from "react";
 import {GalleryContext} from "@/components/gallery/GalleryContextProvider";
 import {Col, Row, Select} from "antd";
 import { SuperLine } from "../SuperLine";
+import {useTranslations} from "@/hooks/useTranslations";
 
 export const GalleryFilterBar = () => {
+    const t = useTranslations();
+
     const {
         uploaderName,
         setUploaderName,
@@ -18,7 +21,7 @@ export const GalleryFilterBar = () => {
 
     return <Row justify="center" gutter={15} className="mb-4">
         <Col>
-            <SuperLine>Von wem?</SuperLine>
+            <SuperLine>{t("By whom?")}</SuperLine>
             <Row>
                 <Select
                     className="min-w-32"
@@ -28,7 +31,7 @@ export const GalleryFilterBar = () => {
                         setLoading(true);
                     }}
                     options={[
-                        { label: "Egal", value: "" },
+                        { label: t("Anyone"), value: "" },
                         ...(uploaderNames.map(value => ({label: value, value})))
                     ]}
                 />
@@ -36,7 +39,7 @@ export const GalleryFilterBar = () => {
         </Col>
 
         <Col>
-            <SuperLine>Tag</SuperLine>
+            <SuperLine>{t("Tag")}</SuperLine>
             <Row>
                 <Select
                     className="min-w-32"
@@ -46,7 +49,7 @@ export const GalleryFilterBar = () => {
                         setLoading(true);
                     }}
                     options={[
-                        { label: "Egal", value: "" },
+                        { label: t("Any Tag"), value: "" },
                         ...(tags.map(value => ({label: value, value})))
                     ]}
                 />

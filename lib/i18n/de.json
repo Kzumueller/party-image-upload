@@ -1,0 +1,31 @@
+{
+  "de": {
+    "Upload": "Hochladen",
+    "Gallery": "Galerie",
+    "Slideshow": "Präsentation",
+    "Admin": "Admin",
+
+    "Upload Images": "Bilder Hochladen",
+    "Submit!": "Hochladen!",
+    "What's your name?": "Wer bist du?",
+    "My name is ...": "Ich heiße ...",
+    "Select Images": "Bilder auswählen",
+    "Tags ...": "Tags ...",
+    "Images uploaded successfully!": "Bilder erfolgreich hochgeladen!",
+
+    "By whom?": "Von wem?",
+    "Anyone": "Egal",
+    "Tag": "Tag",
+    "Any Tag": "Egal",
+
+    "%start - %end of %total": "%start - %end von %total",
+    "%name at %date": "%name um %date",
+
+    "Full Screen": "Vollbild",
+
+    "Login": "Login",
+    "E-Mail": "E-Mail",
+    "Password": "Passwort",
+    "Login failed": "Login fehlgeschlagen!"
+  }
+}

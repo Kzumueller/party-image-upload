@@ -1,16 +1,16 @@
 "use client"
 
 import {useContext, useEffect, useMemo} from "react";
-import {PresentationContext} from "@/components/presentation/PresentationContextProvider";
+import {SlideshowContext} from "@/components/slideshow/SlideshowContextProvider";
 import {collection, limit, onSnapshot, orderBy, query} from "firebase/firestore";
 import {firestore} from "@/lib/firebase/firebase";
 import {Image} from "@/components/gallery/GalleryContextProvider";
 
-export const PresentationSubscriber = () => {
+export const SlideshowSubscriber = () => {
     const {
         setImages,
         setLoading
-    } = useContext(PresentationContext);
+    } = useContext(SlideshowContext);
 
     const imageCollection = useMemo(() => collection(firestore, "images"), []);
     const imageQuery = useMemo(() => query(imageCollection, orderBy("createdAt", "desc"), limit(25)), [imageCollection]);

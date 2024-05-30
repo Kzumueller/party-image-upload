@@ -1,13 +1,16 @@
 "use client"
 
 import {useContext, useEffect, useRef, useState} from "react";
-import {PresentationContext} from "@/components/presentation/PresentationContextProvider";
+import {SlideshowContext} from "@/components/slideshow/SlideshowContextProvider";
 import {getDownloadURL, ref} from "@firebase/storage";
 import {cloudStorage} from "@/lib/firebase/firebase";
 import {Button, Col, Row} from "antd";
+import Title from "antd/es/typography/Title";
+import {useTranslations} from "@/hooks/useTranslations";
 
-export const PresentationPanel = () => {
-    const { images } = useContext(PresentationContext);
+export const SlideshowPanel = () => {
+    const t = useTranslations();
+    const { images } = useContext(SlideshowContext);
     const [nextIndex, setNextIndex] = useState(images?.length - 1);
     const [currentImage, setCurrentImage] = useState(images[0]);
     const [currentURL, setCurrentURL] = useState('');
@@ -44,8 +47,10 @@ export const PresentationPanel = () => {
     const enterFullscreen = () => (fullScreenRef.current as HTMLElement).requestFullscreen({});
 
     return <Col>
+        <Title level={1} className="text-center">{t("Slideshow")}</Title>
+
         <Row justify={"center"} className="mb-5">
-            <Button type="primary" onClick={enterFullscreen}>Vollbild</Button>
+            <Button type="primary" onClick={enterFullscreen}>{t("Full Screen")}</Button>
         </Row>
 
         <Row justify="center">

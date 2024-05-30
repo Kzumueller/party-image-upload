@@ -10,8 +10,11 @@ import {cloudStorage, firestore} from "@/lib/firebase/firebase";
 import {ref, uploadBytes, uploadString} from "@firebase/storage";
 import {Image} from "@/components/gallery/GalleryContextProvider";
 import {Timestamp} from "@firebase/firestore";
+import Title from "antd/es/typography/Title";
+import {useTranslations} from "@/hooks/useTranslations";
 
 export const UploadManager = () => {
+    const t = useTranslations();
     const {uploaderName, images, setImages, tags, setTags} = useContext(UploadContext);
     const [uploading, setUploading] = useState(false);
 
@@ -40,13 +43,13 @@ export const UploadManager = () => {
                 createdAt: Timestamp.now(),
                 updatedAt: Timestamp.now()
             } as Image);
-
-            setUploading(false);
-
-            notification.success({
-                message: "Bilder erfolgreich hochgeladen!"
-            })
         }));
+
+        setUploading(false);
+
+        notification.success({
+            message: t("Images uploaded successfully!")
+        })
 
         setImages([]);
         setTags({});
@@ -54,6 +57,8 @@ export const UploadManager = () => {
     }, [uploaderName, images, tags])
 
     return <>
+        <Title level={1} className="text-center">{t("Upload Images")}</Title>
+
         <Row justify="center" className="mt-7 mb-5">
             <Col>
                 <UploaderName />
@@ -74,7 +79,7 @@ export const UploadManager = () => {
                     loading={uploading}
                     onClick={upload}
                 >
-                    Hochladen!
+                    {t("Submit!")}
                 </Button>
             </div>
         }

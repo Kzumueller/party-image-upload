@@ -1,0 +1,31 @@
+{
+  "es": {
+    "Upload": "Cargar",
+    "Gallery": "Galería",
+    "Slideshow": "Presentación",
+    "Admin": "Admin",
+
+    "Upload Images": "Cargar Fotos",
+    "Submit!": "¡Enviar!",
+    "What's your name?": "¿Cómo te llamas?",
+    "My name is ...": "Me llamo ...",
+    "Select Images": "Seleccionar fotos",
+    "Tags ...": "Tags ...",
+    "Images uploaded successfully!": "¡Fotos cargadas correctamente!",
+
+    "By whom?": "¿Por quién?",
+    "Anyone": "Cualquiera",
+    "Tag": "Tag",
+    "Any Tag": "Todos",
+
+    "%start - %end of %total": "de %start a %end de %total",
+    "%name at %date": "%name a las %date",
+
+    "Full Screen": "Pantalla completa",
+
+    "Login": "Iniciar sesión",
+    "E-Mail": "E-Mail",
+    "Password": "Contraseña",
+    "Login failed": "¡Error de inicio de sesión!"
+  }
+}

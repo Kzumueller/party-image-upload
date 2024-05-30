@@ -1,5 +1,4 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
 import "./globals.css";
 import {ConfigProvider, Layout, Row, ThemeConfig} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
@@ -8,8 +7,8 @@ import {MainNavigation} from "@/components/navigation/MainNavigation";
 import {Logo} from "@/components/navigation/Logo";
 import {AuthContextProvider} from "@/components/login/AuthContextProvider";
 import {LoadingScreen} from "@/components/loadingScreen/LoadingScreen";
-
-const inter = Inter({ subsets: ["latin"] });
+import {TranslationsContextProvider} from "@/components/TranslationsContextProvider";
+import {LanguageSelector} from "@/components/footer/LanguageSelector";
 
 export const metadata: Metadata = {
   title: "Rike 👰🏼🤵🏽 Andi",
@@ -29,25 +28,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de">
+    <html>
         <body>
         <ConfigProvider theme={theme}>
             <AntdRegistry>
-                <Layout className="w-full !min-h-lvh">
-                    <AuthContextProvider>
-                        <LoadingScreen />
-                        <Header className="flex items-center !pl-0">
-                            <Logo />
-                            <MainNavigation />
-                        </Header>
-                        <Content className="p-5">
-                            {children}
-                        </Content>
-                        <Footer className="text-center">
-                            <Row justify="center">Rike 👰🏼🤵🏽 Andi</Row>
-                            <Row justify="center">20.07.2024</Row>
-                        </Footer>
-                    </AuthContextProvider>
+                <Layout className="w-full !min-h-svh">
+                    <TranslationsContextProvider>
+                        <AuthContextProvider>
+                            <LoadingScreen />
+                            <Header className="flex justify-start items-center !p-0 !m-0 w-svh">
+                                <Logo />
+                                <MainNavigation />
+                            </Header>
+                            <Content className="p-5">
+                                {children}
+                            </Content>
+                            <Footer className="text-center">
+                                <Row justify="end"><LanguageSelector /></Row>
+                            </Footer>
+                        </AuthContextProvider>
+                    </TranslationsContextProvider>
                 </Layout>
             </AntdRegistry>
         </ConfigProvider>

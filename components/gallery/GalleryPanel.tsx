@@ -5,8 +5,10 @@ import {GalleryContext} from "@/components/gallery/GalleryContextProvider";
 import {Col, Pagination, Row, Skeleton} from "antd";
 import {ImagePanel} from "@/components/gallery/ImagePanel";
 import {pageSize} from "@/components/gallery/GalleryContextProvider";
+import {useTranslations} from "@/hooks/useTranslations";
 
 export const GalleryPanel = () => {
+    const t = useTranslations();
     const { images, page, setPage, total, loading } = useContext(GalleryContext);
 
     return <>
@@ -33,7 +35,11 @@ export const GalleryPanel = () => {
                 current={page}
                 onChange={(current) => setPage(current)}
                 total={total}
-                showTotal={(total, range) => `${range[0]} - ${range[1]} von ${total}`}
+                showTotal={(total, range) => t("%start - %end of %total")
+                    .replace("%start", range[0].toString())
+                    .replace("%end", range[1].toString())
+                    .replace("%total", total.toString())
+                }
                 showSizeChanger={false}
                 hideOnSinglePage
             />
