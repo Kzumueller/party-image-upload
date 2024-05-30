@@ -1,10 +1,9 @@
 "use client"
 
 import {useContext, useEffect, useMemo} from "react";
-import {AdminContext} from "@/components/admin/AdminContextProvider";
-import {collection, limit, onSnapshot, orderBy, query} from "firebase/firestore";
+import {AdminContext, UserData} from "@/components/admin/AdminContextProvider";
+import {collection, onSnapshot, query} from "firebase/firestore";
 import {firestore} from "@/lib/firebase/firebase";
-import {Image} from "@/components/gallery/GalleryContextProvider";
 
 export const AdminSubscriber = () => {
     const {
@@ -18,9 +17,9 @@ export const AdminSubscriber = () => {
     /** Subscription effect */
     useEffect(() => {
         return onSnapshot(userQuery, snapshot => {
-                const users = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id } as Image));
+                const users = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id } as UserData));
 
-                setUsers(users as any);
+                setUsers(users);
                 setLoading(false);
             },
             error => console.error(error)

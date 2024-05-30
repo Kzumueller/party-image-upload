@@ -1,11 +1,16 @@
 "use client"
 
 import {createContext, ReactNode, useState} from "react"
-import {User} from "@firebase/auth-types";
+
+export type UserData = {
+    id?: string
+    email: string;
+    permissions: Permissions;
+}
 
 export type AdminState = {
-    users: User[];
-    setUsers: (list: User[]) => void;
+    users: UserData[];
+    setUsers: (list: UserData[]) => void;
     loading: boolean,
     setLoading: (bool: boolean) => void
 };
@@ -18,7 +23,7 @@ export const AdminContext = createContext<AdminState>({
 })
 
 export const AdminContextProvider = ({children}: { children: ReactNode }) => {
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<UserData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     return <AdminContext.Provider value={{

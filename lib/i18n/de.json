@@ -26,6 +26,13 @@
     "Login": "Login",
     "E-Mail": "E-Mail",
     "Password": "Passwort",
-    "Login failed": "Login fehlgeschlagen!"
+    "Login failed": "Login fehlgeschlagen!",
+
+    "upload": "Hochladen",
+    "download": "Herunterladen",
+    "present": "Präsentieren",
+    "admin": "Admin",
+    "Permissions": "Berechtigungen",
+    "Users": "Nutzer"
   }
 }

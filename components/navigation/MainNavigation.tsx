@@ -18,7 +18,7 @@ export const MainNavigation = () => {
         ...(permissions?.present ? [{ key: "/slideshow", label: <Link href="/slideshow">{t("Slideshow")}</Link> }] : []),
         ...(permissions?.admin ? [{ key: "/admin", label: <Link href="/admin">{t("Admin")}</Link> }] : []),
         ],
-        [permissions]);
+        [permissions, t]);
 
     return <Menu
         mode="horizontal"

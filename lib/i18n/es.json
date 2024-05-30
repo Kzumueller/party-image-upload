@@ -26,6 +26,13 @@
     "Login": "Iniciar sesión",
     "E-Mail": "E-Mail",
     "Password": "Contraseña",
-    "Login failed": "¡Error de inicio de sesión!"
+    "Login failed": "¡Error de inicio de sesión!",
+
+    "upload": "Cargar",
+    "download": "Descargar",
+    "present": "Presentar",
+    "admin": "Admin",
+    "Permissions": "Permisos",
+    "Users": "Usuarios"
   }
 }
