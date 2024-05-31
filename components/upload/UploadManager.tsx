@@ -20,40 +20,46 @@ export const UploadManager = () => {
 
     /** uploads image files to google cloud and stores meta info in firestore  */
     const upload = useCallback(async () => {
-        setUploading(true);
+        try {
+            setUploading(true);
 
-        const imageCollection = collection(firestore, "images");
+            const imageCollection = collection(firestore, "images");
 
-        await Promise.all(images.map(async (image,  index) => {
-            const basePath = `${uploaderName}/${image.id}`;
-            const fileExtension = image.file.name.split(".")[1]
+            await Promise.all(images.map(async (image,  index) => {
+                const basePath = `${uploaderName}/${image.id}`;
+                const fileExtension = image.file.name.split(".")[1]
 
-            const fullSizeImageRef = ref(cloudStorage, `${basePath}/full.${fileExtension}`);
-            const previewImageRef = ref(cloudStorage, `${basePath}/preview.${fileExtension}`);
+                const fullSizeImageRef = ref(cloudStorage, `${basePath}/full.${fileExtension}`);
+                const previewImageRef = ref(cloudStorage, `${basePath}/preview.${fileExtension}`);
 
-            await uploadBytes(fullSizeImageRef, image.file as Blob);
-            await uploadString(previewImageRef, image.preview, "data_url");
+                await uploadBytes(fullSizeImageRef, image.file as Blob);
+                await uploadString(previewImageRef, image.preview, "data_url");
 
-            await addDoc(imageCollection, {
-                uploaderName,
-                fullSizePath: fullSizeImageRef.fullPath,
-                previewPath: previewImageRef.fullPath,
-                fileExtension,
-                tags: tags[image.id] ?? [],
-                createdAt: Timestamp.now(),
-                updatedAt: Timestamp.now()
-            } as Image);
-        }));
+                await addDoc(imageCollection, {
+                    uploaderName,
+                    fullSizePath: fullSizeImageRef.fullPath,
+                    previewPath: previewImageRef.fullPath,
+                    fileExtension,
+                    tags: tags[image.id] ?? [],
+                    createdAt: Timestamp.now(),
+                    updatedAt: Timestamp.now()
+                } as Image);
+            }));
 
-        setUploading(false);
+            setUploading(false);
 
-        notification.success({
-            message: t("Images uploaded successfully!")
-        })
+            notification.success({
+                message: t("Images uploaded successfully!")
+            })
 
-        setImages([]);
-        setTags({});
-
+            setImages([]);
+            setTags({});
+        } catch(error) {
+            notification.error({
+                message: t("Upload failed!"),
+                description: String(error)
+            })
+        }
     }, [images, t, setImages, setTags, uploaderName, tags]);
 
     return <>

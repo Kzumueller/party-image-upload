@@ -66,7 +66,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     /** detects real path changes */
     useEffect(() => {
         if(loading && pathname !== initialPathname) {
-            console.log({ pathname, initialPathname })
             setLoading(false);
         }
         // no more next router events

@@ -20,7 +20,6 @@ export const SlideshowPanel = () => {
     const fullScreenRef = useRef<any>();
 
     useEffect(() => {
-        console.log("images changed hook called")
         if(!currentImage) setCurrentImage(images[0]);
 
         setNextIndex(0);
