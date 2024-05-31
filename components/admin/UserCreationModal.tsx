@@ -37,7 +37,7 @@ export const UserCreationModal = () => {
                 <Row className="mb-5">
                     <Input
                         type="email"
-                        placeholder={t("E-mail")}
+                        placeholder={t("E-Mail")}
                         value={email}
                         onChange={({target: {value}}) => setEmail(value)}
                     />
