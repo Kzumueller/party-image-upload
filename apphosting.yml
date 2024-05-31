@@ -7,19 +7,19 @@ runConfig:
 
 env:
   - variable: NEXT_PUBLIC_FIREBASE_API_KEY
-    secret: projects/845285450838/secrets/NEXT_PUBLIC_FIREBASE_API_KEY/versions/2
+    value: "AIzaSyBaZ1kNwA-YdqsyRZ6ZB49DprNhE8reaIE"
 
   - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-    secret: projects/845285450838/secrets/NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: "party-image-upload.firebaseapp.com"
 
   - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-    secret: projects/845285450838/secrets/NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: "party-image-upload"
 
   - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-    secret: projects/845285450838/secrets/NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: "party-image-upload.appspot.com"
 
   - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-    secret: projects/845285450838/secrets/NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: 845285450838
 
   - variable: NEXT_PUBLIC_FIREBASE_APP_ID
-    secret: projects/845285450838/secrets/NEXT_PUBLIC_FIREBASE_APP_ID
+    value: "1:845285450838:web:86ce3a3fabef6aaeda07f7"
