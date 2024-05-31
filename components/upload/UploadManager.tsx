@@ -54,7 +54,7 @@ export const UploadManager = () => {
         setImages([]);
         setTags({});
 
-    }, [uploaderName, images, tags])
+    }, [images, t, setImages, setTags, uploaderName, tags]);
 
     return <>
         <Title level={1} className="text-center">{t("Upload Images")}</Title>

@@ -25,7 +25,7 @@ export const SlideshowSubscriber = () => {
             },
             error => console.error(error)
         );
-    }, [imageQuery, setImages]);
+    }, [imageQuery, setImages, setLoading]);
 
     return <></>;
 }

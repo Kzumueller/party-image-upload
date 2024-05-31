@@ -34,7 +34,7 @@ export const LoginForm = () => {
             setSigningIn(false);
             setLoading(true);
         }
-    }, []);
+    }, [setLoading, t]);
 
     useEffect(() => {
         if(permissions) router.push("/");

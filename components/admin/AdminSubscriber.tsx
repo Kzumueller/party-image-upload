@@ -24,7 +24,7 @@ export const AdminSubscriber = () => {
             },
             error => console.error(error)
         );
-    }, [userQuery, setUsers]);
+    }, [userQuery, setUsers, setLoading]);
 
     return <></>;
 }
