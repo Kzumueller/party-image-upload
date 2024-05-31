@@ -8,7 +8,6 @@ import { getFirestore } from "firebase/firestore"
 const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 
 if(!apiKey) throw new Error("empty api key!");
-if(apiKey) throw new Error (`got API key: ${apiKey}`);
 
 export const firebaseConfig = {
     apiKey: apiKey,
