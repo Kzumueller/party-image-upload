@@ -4,7 +4,7 @@ import {useCallback, useContext, useMemo, useState} from "react";
 import {AdminContext, UserData} from "@/components/admin/AdminContextProvider";
 import {Button, Col, QRCode, Row, Table} from "antd";
 import {useTranslations} from "@/hooks/useTranslations";
-import {Permissions} from "@/components/login/AuthContextProvider";
+import {PermissionRecord} from "@/components/login/AuthContextProvider";
 import {QrcodeOutlined} from "@ant-design/icons";
 import {QRCodeModal} from "@/components/admin/QRCodeModal";
 
@@ -27,7 +27,7 @@ export const UsersTable = () => {
             key: "permissions",
             title: t("Permissions"),
             dataIndex: "permissions",
-            render: (permissions: Permissions) => Object
+            render: (permissions: PermissionRecord) => Object
                 .entries(permissions)
                 .filter(([_, value]) => value)
                 .map(([key]) => t(key))

@@ -1,11 +1,12 @@
 "use client"
 
 import {createContext, ReactNode, useState} from "react"
+import { PermissionRecord } from "@/components/login/AuthContextProvider";
 
 export type UserData = {
     id?: string
     email: string;
-    permissions: Permissions;
+    permissions: PermissionRecord;
 }
 
 export type AdminState = {

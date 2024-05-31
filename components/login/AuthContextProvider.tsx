@@ -7,7 +7,7 @@ import {User} from "@firebase/auth-types";
 import {usePathname, useRouter} from "next/navigation";
 import {doc, getDoc} from "@firebase/firestore";
 
-export type Permissions = {
+export type PermissionRecord = {
     upload: boolean;
     download: boolean;
     present: boolean;
@@ -16,7 +16,7 @@ export type Permissions = {
 
 type AuthState = {
     user: User | null;
-    permissions: Permissions | null;
+    permissions: PermissionRecord | null;
     loading: boolean;
     setLoading: (loading: boolean) => void;
 }
@@ -34,7 +34,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     const router = useRouter();
 
     const [user, setUser] = useState<User | null>(null);
-    const [permissions, setPermissions] = useState<Permissions | null>(null);
+    const [permissions, setPermissions] = useState<PermissionRecord | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     /**

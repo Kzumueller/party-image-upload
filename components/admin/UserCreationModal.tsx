@@ -4,11 +4,8 @@ import {useTranslations} from "@/hooks/useTranslations";
 import {useCallback, useContext, useState} from "react";
 import {SuperLine} from "@/components/SuperLine";
 import {AdminContext} from "@/components/admin/AdminContextProvider";
-import {Permissions} from "@/components/login/AuthContextProvider";
-import {createUserWithEmailAndPassword} from "firebase/auth";
-import {fireAuth, firestore} from "@/lib/firebase/firebase";
-import {addDoc, collection, setDoc} from "firebase/firestore";
-import {doc} from "@firebase/firestore";
+import {PermissionRecord} from "@/components/login/AuthContextProvider";
+import {createUser} from "@/routes/firebaseAdmin/createUser";
 
 export const UserCreationModal = () => {
     const t = useTranslations();
@@ -16,7 +13,7 @@ export const UserCreationModal = () => {
     const [open, setOpen] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [permissions, setPermissions] = useState<Permissions>({
+    const [permissions, setPermissions] = useState<PermissionRecord>({
         upload: false,
         download: false,
         present: false,
@@ -24,17 +21,6 @@ export const UserCreationModal = () => {
     })
 
     const onCancel = useCallback(() => setOpen(false), [setOpen]);
-
-    const createUser = useCallback(async (email: string, password: string, permissions: Permissions) => {
-        const newUser = await createUserWithEmailAndPassword(fireAuth, email, password);
-        await setDoc(
-            doc(firestore, "users", newUser.user.uid),
-            {
-                email,
-                permissions
-            }
-        )
-    }, []);
 
     return <>
         <Modal
