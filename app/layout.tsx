@@ -36,7 +36,7 @@ export default function RootLayout({
                     <TranslationsContextProvider>
                         <AuthContextProvider>
                             <LoadingScreen />
-                            <Header className="flex justify-start items-center !p-0 !m-0 w-svh">
+                            <Header className="flex justify-start items-center gap-x-3 !pl-3 !pr-3 !m-0 !w-svh !max-w-full">
                                 <Logo />
                                 <MainNavigation />
                             </Header>

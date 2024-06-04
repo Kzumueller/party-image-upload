@@ -26,13 +26,13 @@ export const LoginForm = () => {
         try {
             setSigningIn(true);
             await signInWithEmailAndPassword(fireAuth, email, password);
+            setLoading(true);
         } catch(error) {
             notification.error({
                 message: t("Login failed")
             })
         } finally {
             setSigningIn(false);
-            setLoading(true);
         }
     }, [setLoading, t]);
 

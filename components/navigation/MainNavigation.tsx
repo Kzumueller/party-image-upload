@@ -23,7 +23,7 @@ export const MainNavigation = () => {
     return <Menu
         mode="horizontal"
         theme="dark"
-        //className="w-full"
+        className="!inline !w-full !max-w-full"
         selectedKeys={[pathname]}
         items={items}
     />
