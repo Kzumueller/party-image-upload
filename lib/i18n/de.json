@@ -40,6 +40,9 @@
     "Save Image": "Bild speichern",
     "Create User": "Nutzer anlegen",
     "Save": "Speichern",
-    "This user may:": "Dieser Nutzer darf:"
+    "This user may:": "Dieser Nutzer darf:",
+    "E-Mail already exists": "E-Mail existiert bereits",
+    "Delete this user?": "Diesen Nutzer löschen?",
+    "Could not delete user": "Nutzer konnte nicht gelöscht werden"
   }
 }

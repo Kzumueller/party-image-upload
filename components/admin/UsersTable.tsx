@@ -7,10 +7,12 @@ import {useTranslations} from "@/hooks/useTranslations";
 import {PermissionRecord} from "@/components/login/AuthContextProvider";
 import {QrcodeOutlined} from "@ant-design/icons";
 import {QRCodeModal} from "@/components/admin/QRCodeModal";
+import {DeleteUserButton} from "@/components/admin/DeleteUserButton";
+import {fireAuth} from "@/lib/firebase/firebase";
 
 export const UsersTable = () => {
     const t = useTranslations();
-    const { 
+    const {
         users,
         setSelectedUser,
         setQrModalOpen,
@@ -36,26 +38,32 @@ export const UsersTable = () => {
         {
             key: "actions",
             render: (_: any, user: UserData) => <Col>
-                <Row>
-                    <Button
-                        type="primary"
-                        icon={<QrcodeOutlined />}
-                        onClick={() => {
-                            setSelectedUser(user);
-                            setQrModalOpen(true);
-                        }}
-                    />
+                <Row gutter={10}>
+                    <Col>
+                        <Button
+                            type="primary"
+                            icon={<QrcodeOutlined />}
+                            onClick={() => {
+                                setSelectedUser(user);
+                                setQrModalOpen(true);
+                            }}
+                        />
+                    </Col>
+                    {(user.id !== fireAuth.currentUser?.uid) && <Col>
+                        <DeleteUserButton user={user}/>
+                    </Col>}
                 </Row>
             </Col>
         }
     ], [setQrModalOpen, setSelectedUser, t]);
 
     return <Table
-            loading={loading}
-            columns={columns}
-            dataSource={users}
-            pagination={{
-                hideOnSinglePage: true
-            }}
-        />;
+        rowKey={row => row.id!}
+        loading={loading}
+        columns={columns}
+        dataSource={users}
+        pagination={{
+            hideOnSinglePage: true
+        }}
+    />;
 }
