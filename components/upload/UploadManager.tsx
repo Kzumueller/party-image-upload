@@ -78,7 +78,7 @@ export const UploadManager = () => {
         </Row>}
 
         {!!uploaderName && images.length > 0 &&
-            <div className="flex justify-center items-center p-5 bg-white !fixed !bottom-0 left-0 !w-full">
+            <div className="flex justify-center items-center p-5 bg-white !fixed !bottom-0 left-0 !w-full z-40">
                 <Button
                     type="primary"
                     className="!font-bold !w-full max-w-md"

@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import "./globals.css";
-import {ConfigProvider, Layout, Row, ThemeConfig} from "antd";
+import {Col, ConfigProvider, Layout, Row, ThemeConfig} from "antd";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import {AntdRegistry} from '@ant-design/nextjs-registry';
 import {MainNavigation} from "@/components/navigation/MainNavigation";
@@ -9,6 +9,7 @@ import {AuthContextProvider} from "@/components/login/AuthContextProvider";
 import {LoadingScreen} from "@/components/loadingScreen/LoadingScreen";
 import {TranslationsContextProvider} from "@/components/TranslationsContextProvider";
 import {LanguageSelector} from "@/components/footer/LanguageSelector";
+import {LogOut} from "@/components/footer/LogOut";
 
 export const metadata: Metadata = {
   title: "Rike 👰🏼🤵🏽 Andi",
@@ -44,7 +45,10 @@ export default function RootLayout({
                                 {children}
                             </Content>
                             <Footer className="text-center">
-                                <Row justify="end"><LanguageSelector /></Row>
+                                <Row justify="end" align="middle" gutter={15}>
+                                    <Col><LogOut /></Col>
+                                    <Col><LanguageSelector /></Col>
+                                </Row>
                             </Footer>
                         </AuthContextProvider>
                     </TranslationsContextProvider>

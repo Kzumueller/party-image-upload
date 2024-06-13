@@ -5,19 +5,22 @@ import {signInWithEmailAndPassword,} from "firebase/auth";
 import {useCallback, useContext, useEffect, useState} from "react";
 import {fireAuth} from "@/lib/firebase/firebase";
 import Title from "antd/es/typography/Title";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {AuthContext} from "@/components/login/AuthContextProvider";
 import {useTranslations} from "@/hooks/useTranslations";
 
-export const LoginForm = () => {
+type Props = {
+    user: string;
+}
+
+export const LoginForm = ({ user }: Props) => {
     const t = useTranslations();
     const router = useRouter();
-    const query = useSearchParams();
 
     const { permissions, setLoading } = useContext(AuthContext);
 
-    const [userPreset] = useState<boolean>(!!query.get("user"));
-    const [email, setEmail] = useState(query.get("user") ?? "");
+    const [userPreset] = useState<boolean>(!!user);
+    const [email, setEmail] = useState(user ?? "");
     const [password, setPassword] = useState("");
     const [signingIn, setSigningIn] = useState(false);
 

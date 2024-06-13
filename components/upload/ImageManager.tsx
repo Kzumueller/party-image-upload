@@ -7,6 +7,7 @@ import {SuperLine} from "@/components/SuperLine";
 import {UploadContext} from "@/components/upload/UploadContextProvider";
 import {processImageFile} from "@/components/upload/processImageFile";
 import {useTranslations} from "@/hooks/useTranslations";
+import {DeleteButton} from "@/components/DeleteButton";
 
 const presetTags = [
     "Braut",
@@ -85,7 +86,7 @@ export const ImageManager = () => {
                 {images.map(image => <Card key={image.id} className="shadow-md !mb-3">
                     <Row gutter={[10, 10]} align="middle" justify="space-between">
                         <Col className="w-full">
-                            <Row justify="end"><CloseOutlined className="!color-primary cursor-pointer mb-3" onClick={() => removeImage(image.id)} /></Row>
+                            <DeleteButton onClick={() => removeImage(image.id)} />
                             <Row justify="center"><img src={image.preview} className="max-w-lg mb-2" /></Row>
                             <SuperLine>{image.file.name}</SuperLine>
                             <Row className="w-full">

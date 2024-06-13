@@ -1,20 +1,26 @@
 {
   "es": {
-    "Upload": "Cargar",
+    "Yes": "Sí",
+    "No": "No",
+    "Upload": "Subir",
     "Gallery": "Galería",
     "Slideshow": "Presentación",
     "Admin": "Admin",
 
-    "Upload Images": "Cargar Fotos",
+    "Upload Images": "Subir Fotos",
     "Submit!": "¡Enviar!",
     "What's your name?": "¿Cómo te llamas?",
     "My name is ...": "Me llamo ...",
     "Select Images": "Seleccionar fotos",
     "Tags ...": "Tags ...",
-    "Images uploaded successfully!": "¡Fotos cargadas correctamente!",
-    "Upload failed!": "¡Error de carga!",
+    "Images uploaded successfully!": "¡Fotos subido correctamente!",
+    "Upload failed!": "¡Error de subir!",
 
-    "By whom?": "¿Por quién?",
+    "Delete this image?": "¿Borrar esta foto?",
+    "Image deleted successfully!": "¡Foto borrada correctamente!",
+    "Error while deleting image!": "¡Error de borrar!",
+
+    "By whom?": "¿De quién?",
     "Anyone": "Cualquiera",
     "Tag": "Tag",
     "Any Tag": "Todos",
@@ -27,9 +33,9 @@
     "Login": "Iniciar sesión",
     "E-Mail": "E-Mail",
     "Password": "Contraseña",
-    "Login failed": "¡Error de inicio de sesión!",
+    "Login failed": "¡Error de iniciar de sesión!",
 
-    "upload": "Cargar",
+    "upload": "Subir",
     "download": "Descargar",
     "present": "Presentar",
     "admin": "Admin",

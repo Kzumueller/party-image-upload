@@ -57,7 +57,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
                 setPermissions(permissions);
 
                 if(permissions && pathname === "/login") router.push("/");
-                else if(!permissions && pathname !== "/login") router.push("/login");
+                else if(!permissions && !pathname.startsWith("/login")) router.push("/login");
                 else setLoading(false);
             });
         })

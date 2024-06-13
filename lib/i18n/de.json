@@ -1,5 +1,7 @@
 {
   "de": {
+    "Yes": "Ja",
+    "No": "Nein",
     "Upload": "Hochladen",
     "Gallery": "Galerie",
     "Slideshow": "Präsentation",
@@ -13,6 +15,10 @@
     "Tags ...": "Tags ...",
     "Images uploaded successfully!": "Bilder erfolgreich hochgeladen!",
     "Upload failed!": "Hochladen fehlgeschlagen!",
+
+    "Delete this image?": "Dieses Bild löschen?",
+    "Image deleted successfully!": "Bild erfolgreich gelöscht!",
+    "Error while deleting image!": "Löschen fehlgeschlagen!",
 
     "By whom?": "Von wem?",
     "Anyone": "Egal",

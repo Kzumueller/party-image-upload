@@ -20,7 +20,7 @@ export const QRCodeModal = () => {
     const svgRef = useRef<any>(null)
 
     useEffect(() =>
-        setUrl(`${window.location.origin}/login?user=${selectedUser?.email ?? ""}`),
+        setUrl(`${window.location.origin}/login/${selectedUser?.email ?? ""}`),
         [selectedUser?.email]
     );
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { GB, DE, ES } from "country-flag-icons/react/3x2";
-import {Dropdown, Select} from "antd";
+import {Button, Dropdown, Select} from "antd";
 import {ReactNode, useContext} from "react";
 import {TranslationsContext} from "@/components/TranslationsContextProvider";
 
@@ -14,13 +14,6 @@ const languageToFlag: Record<string, ReactNode> = {
 export const LanguageSelector = () => {
     const { language, setLanguage } = useContext(TranslationsContext);
 
-    /*
-    * <Select
-        value={language}
-        onChange={setLanguage}
-        options={}
-    />*/
-
     return <Dropdown
         placement="top"
         menu={{
@@ -31,6 +24,6 @@ export const LanguageSelector = () => {
             }))
     }}
     >
-        {languageToFlag[language]}
+        <Button icon={languageToFlag[language]}></Button>
     </Dropdown>
 }
