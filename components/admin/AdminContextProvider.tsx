@@ -16,6 +16,8 @@ export type AdminState = {
     setSelectedUser: (user: UserData | null) => void;
     qrModalOpen: boolean;
     setQrModalOpen: (open: boolean) => void;
+    changePasswordModalOpen: boolean;
+    setChangePasswordModalOpen: (open: boolean) => void;
     loading: boolean,
     setLoading: (bool: boolean) => void
 };
@@ -27,6 +29,8 @@ export const AdminContext = createContext<AdminState>({
     setSelectedUser: () => {},
     qrModalOpen: false,
     setQrModalOpen: () => {},
+    changePasswordModalOpen: false,
+    setChangePasswordModalOpen: () => {},
     loading: false,
     setLoading: () => {}
 })
@@ -35,6 +39,7 @@ export const AdminContextProvider = ({children}: { children: ReactNode }) => {
     const [users, setUsers] = useState<UserData[]>([]);
     const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
     const [qrModalOpen, setQrModalOpen] = useState(false);
+    const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false);
     const [loading, setLoading] = useState<boolean>(true);
 
     return <AdminContext.Provider value={{
@@ -44,6 +49,8 @@ export const AdminContextProvider = ({children}: { children: ReactNode }) => {
         setSelectedUser,
         qrModalOpen,
         setQrModalOpen,
+        changePasswordModalOpen,
+        setChangePasswordModalOpen,
         loading,
         setLoading
     }}>{children}</AdminContext.Provider>

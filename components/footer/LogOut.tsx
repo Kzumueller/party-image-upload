@@ -18,8 +18,8 @@ export const LogOut = () => {
     const logOut = useCallback(() => {
         const currentEmail = user?.email;
         fireAuth.signOut();
-        console.log(`/login/${currentEmail}`);
-        router.replace(`/login/${currentEmail}`);
+        console.log(`redirecting to /login/${currentEmail}`);
+        router.push(`/login/${currentEmail}`);
     }, [router, user]);
 
     if(!loggedIn) return <></>;

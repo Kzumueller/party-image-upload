@@ -13,8 +13,8 @@ export const DeleteButton = ({ onClick, loading = false }: Props) => {
     return <Row justify="end">
         {loading
             ? <LoadingOutlined/>
-            : <Popconfirm onConfirm={onClick} title={t("Delete this image?")} okText={t("Yes")} cancelText={t("No")}>
-                <CloseOutlined className="!color-primary cursor-pointer mb-3"/>
+            : <Popconfirm onConfirm={onClick} title={t("Delete this image?")} okText={t("Yes")} okButtonProps={{ danger: true }} cancelText={t("No")}>
+                <CloseOutlined className="!color-danger cursor-pointer mb-3"/>
             </Popconfirm>
         }
     </Row>

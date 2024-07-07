@@ -16,10 +16,25 @@ export const metadata: Metadata = {
   description: "20.07.2024"
 };
 
+const primary = "#A6553C";
+const secondary = "#001529";
+
 const theme : ThemeConfig = {
     token: {
-        colorPrimary: "#A6553C",
-        colorText: "#868686"
+        colorPrimary: primary,
+        colorText: "#868686",
+        colorError: "#933"
+    },
+    components: {
+        Layout: {
+            headerBg: secondary,
+
+        },
+        Menu: {
+            darkItemBg: secondary,
+            darkItemColor: "#ddd",
+            darkItemSelectedColor: "#fff"
+        }
     }
 }
 
@@ -37,7 +52,7 @@ export default function RootLayout({
                     <TranslationsContextProvider>
                         <AuthContextProvider>
                             <LoadingScreen />
-                            <Header className="flex justify-start items-center gap-x-3 !pl-3 !pr-3 !m-0 !w-svh !max-w-full">
+                            <Header className="flex justify-start items-center gap-x-3 !pl-3 !pr-3 !m-0 !w-svh !max-w-full !h-max">
                                 <Logo />
                                 <MainNavigation />
                             </Header>

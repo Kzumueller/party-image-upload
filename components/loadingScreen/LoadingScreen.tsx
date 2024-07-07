@@ -14,7 +14,7 @@ export const LoadingScreen = () => {
 
     if(!loading) return <></>;
 
-    return <div className="fixed w-dvw h-dvh top-0 left-0 flex flex-col justify-start items-center z-50" style={{ background: "#001529" }}>
+    return <div className="fixed w-dvw h-dvh top-0 left-0 flex flex-col justify-start items-center z-50 bg-secondary">
         <div className="h-1/2 flex flex-col justify-evenly items-center">
             <Image src={dataURL} alt="logo" width={120} height={120} />
             <LoadingOutlined className="loading-icon" />
