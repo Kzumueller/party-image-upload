@@ -16,24 +16,27 @@ export const metadata: Metadata = {
   description: "20.07.2024"
 };
 
-const primary = "#A6553C";
-const secondary = "#001529";
+const primary = "#961e4f";
+const secondary = "#eca2ab";
 
 const theme : ThemeConfig = {
     token: {
         colorPrimary: primary,
-        colorText: "#868686",
-        colorError: "#933"
+        //colorText: "#757575",
+        colorText: primary,
+        colorError: "#d44",
+        colorTextPlaceholder: "#757575",
+        colorBorder: "#bbb"
     },
     components: {
         Layout: {
             headerBg: secondary,
-
+            colorBgLayout: "#f5f5f5"
         },
         Menu: {
             darkItemBg: secondary,
-            darkItemColor: "#ddd",
-            darkItemSelectedColor: "#fff"
+            darkItemColor: primary,
+            darkItemSelectedColor: secondary
         }
     }
 }

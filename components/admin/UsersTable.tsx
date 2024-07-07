@@ -34,6 +34,7 @@ export const UsersTable = () => {
             render: (permissions: PermissionRecord) => Object
                 .entries(permissions)
                 .filter(([_, value]) => value)
+                .sort(([left], [right]) => left < right ? -1 : 1)
                 .map(([key]) => t(key))
                 .join(", ")
         },

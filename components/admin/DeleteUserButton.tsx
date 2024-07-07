@@ -30,7 +30,7 @@ export const DeleteUserButton = ({ user }: Props) => {
         setDeleting(false);
     }, [t, user.id])
 
-    return <Popconfirm title={t("Delete this user?")} onConfirm={removeUser} okText={t("Yes")} cancelText={t("No")}>
+    return <Popconfirm title={t("Delete this user?")} onConfirm={removeUser} okText={t("Yes")} okButtonProps={{ danger: true }} cancelText={t("No")}>
         <Button loading={deleting} danger type="primary" icon={<DeleteOutlined />} />
     </Popconfirm>;
 }

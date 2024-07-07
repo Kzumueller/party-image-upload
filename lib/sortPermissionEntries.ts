@@ -1,0 +1,1 @@
+export const sortPermissionEntries = ([left]: (string|boolean)[], [right]: (string|boolean)[]) => left < right ? -1 : 1;

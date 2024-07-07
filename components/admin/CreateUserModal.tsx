@@ -8,8 +8,9 @@ import {PermissionRecord} from "@/components/login/AuthContextProvider";
 import {createUser} from "@/actions/firebaseAdmin/createUser";
 import {doc, setDoc} from "firebase/firestore";
 import {firestore} from "@/lib/firebase/firebase";
+import {sortPermissionEntries} from "@/lib/sortPermissionEntries";
 
-export const UserCreationModal = () => {
+export const CreateUserModal = () => {
     const t = useTranslations();
     const { users } = useContext(AdminContext);
     const [open, setOpen] = useState(false);
@@ -52,6 +53,7 @@ export const UserCreationModal = () => {
 
             onCancel();
         } catch (error) {
+            console.error(error);
             notification.error({ message: "Could not create user" });
         }
         
@@ -70,7 +72,7 @@ export const UserCreationModal = () => {
                 <Col><Button loading={loading} onClick={onCancel}>{t("Close")}</Button></Col>
             </Row>}
         >
-            <Col>
+            <Col className="ml-2 mr-2">
                 <SuperLine>{t("E-Mail")}</SuperLine>
                 <Row className={duplicateEmail ? "" : "mb-5"}>
                     <Input
@@ -95,7 +97,7 @@ export const UserCreationModal = () => {
 
                 <SuperLine>{t("This user may:")}</SuperLine>
                 <Row className="mb-5">
-                    {Object.entries(permissions).map(([permission, value]) => <Col key={permission}>
+                    {Object.entries(permissions).sort(sortPermissionEntries).map(([permission, value]) => <Col key={permission}>
                         <Checkbox
                             checked={value}
                             onChange={({ target: { checked } }) => setPermissions({ ...permissions, [permission]: checked })}

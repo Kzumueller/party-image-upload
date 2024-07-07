@@ -4,8 +4,8 @@ import {useTranslations} from "@/hooks/useTranslations";
 import Title from "antd/es/typography/Title";
 import {UsersTable} from "@/components/admin/UsersTable";
 import {QRCodeModal} from "@/components/admin/QRCodeModal";
-import {UserCreationModal} from "@/components/admin/UserCreationModal";
-import {ChangePasswordModal} from "@/components/admin/ChangePasswordModal";
+import {CreateUserModal} from "@/components/admin/CreateUserModal";
+import {EditUserModal} from "@/components/admin/EditUserModal";
 
 export const UserManagement = () => {
     const t = useTranslations();
@@ -13,9 +13,9 @@ export const UserManagement = () => {
     return <>
         <Title level={1}>{t("Users")}</Title>
 
-        <UserCreationModal />
+        <CreateUserModal />
 
-        <ChangePasswordModal />
+        <EditUserModal />
 
         <QRCodeModal />
 
