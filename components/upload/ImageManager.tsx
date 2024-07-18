@@ -2,7 +2,7 @@
 
 import {useCallback, useContext, useMemo, useRef, useState} from "react";
 import {Button, Card, Col, Row, Select} from "antd";
-import {CloseOutlined, FileImageOutlined} from "@ant-design/icons";
+import {FileImageOutlined} from "@ant-design/icons";
 import {SuperLine} from "@/components/SuperLine";
 import {UploadContext} from "@/components/upload/UploadContextProvider";
 import {processImageFile} from "@/components/upload/processImageFile";
@@ -10,12 +10,12 @@ import {useTranslations} from "@/hooks/useTranslations";
 import {DeleteButton} from "@/components/DeleteButton";
 
 const presetTags = [
-    "Braut",
-    "Bräutigam",
     "Kirche",
     "Sektempfang",
-    "Saal",
-    "Photo Challenge"
+    "Rike & Andi",
+    "Foto Challenge (Gästebuch)",
+    "Party",
+    "Essen"
 ]
 
 export const ImageManager = () => {
