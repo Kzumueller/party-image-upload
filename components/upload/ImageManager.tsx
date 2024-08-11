@@ -9,12 +9,7 @@ import {processImageFile} from "@/components/upload/processImageFile";
 import {useTranslations} from "@/hooks/useTranslations";
 import {DeleteButton} from "@/components/DeleteButton";
 
-const presetTags = [
-    "Kirche",
-    "Sektempfang",
-    "Party",
-    "Essen"
-]
+const presetTags = String(process.env.NEXT_PUBLIC_PRESET_TAGS).split(",")
 
 export const ImageManager = () => {
     const t = useTranslations();

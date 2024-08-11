@@ -29,22 +29,6 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.bg-secondary {
-  background-color: var(--colour-secondary);
-}
-
-.\!bg-secondary {
-  background-color: var(--colour-secondary)!important;
-}
-
-.color-primary {
-  color: var(--colour-primary);
-}
-
-.\!color-primary {
-  color: var(--colour-primary)!important;
-}
-
 .color-danger {
   color: var(--colour-danger);
 }

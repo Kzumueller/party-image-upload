@@ -12,12 +12,12 @@ import {LanguageSelector} from "@/components/footer/LanguageSelector";
 import {LogOut} from "@/components/footer/LogOut";
 
 export const metadata: Metadata = {
-  title: "Cati 👰🏼🤵🏽 Felix",
-  description: "31.08.2024"
+    title: process.env.NEXT_PUBLIC_META_TITLE,
+    description: process.env.NEXT_PUBLIC_META_DESCRIPTION
 };
 
-const primary = "#b8860b";
-const secondary = "#355e3b";
+const primary = `#${process.env.NEXT_PUBLIC_PRIMARY_COLOUR}`;
+const secondary = `#${process.env.NEXT_PUBLIC_SECONDARY_COLOUR}`;
 
 const theme : ThemeConfig = {
     token: {
