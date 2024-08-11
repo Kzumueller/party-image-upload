@@ -5,7 +5,7 @@ import {AuthContext} from "@/components/login/AuthContextProvider";
 import Image from "next/image";
 import {LoadingOutlined} from "@ant-design/icons";
 
-import svg from "../../public/logo.svg";
+import svg from "../../app/icon.svg";
 
 import "./loading.css";
 
