@@ -12,17 +12,16 @@ import {LanguageSelector} from "@/components/footer/LanguageSelector";
 import {LogOut} from "@/components/footer/LogOut";
 
 export const metadata: Metadata = {
-  title: "Rike 👰🏼🤵🏽 Andi",
-  description: "20.07.2024"
+  title: "Cati 👰🏼🤵🏽 Felix",
+  description: "31.08.2024"
 };
 
-const primary = "#961e4f";
-const secondary = "#eca2ab";
+const primary = "#b8860b";
+const secondary = "#355e3b";
 
 const theme : ThemeConfig = {
     token: {
         colorPrimary: primary,
-        //colorText: "#757575",
         colorText: primary,
         colorError: "#d44",
         colorTextPlaceholder: "#757575",

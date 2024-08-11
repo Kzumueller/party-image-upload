@@ -12,8 +12,6 @@ import {DeleteButton} from "@/components/DeleteButton";
 const presetTags = [
     "Kirche",
     "Sektempfang",
-    "Rike & Andi",
-    "Foto Challenge (Gästebuch)",
     "Party",
     "Essen"
 ]
