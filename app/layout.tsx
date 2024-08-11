@@ -11,30 +11,13 @@ import {TranslationsContextProvider} from "@/components/TranslationsContextProvi
 import {LanguageSelector} from "@/components/footer/LanguageSelector";
 import {LogOut} from "@/components/footer/LogOut";
 
-const title = process.env.NEXT_PUBLIC_META_TITLE;
-const description = process.env.NEXT_PUBLIC_META_DESCRIPTION;
-
-console.log({
-    title,
-    description,
-})
-
 export const metadata: Metadata = {
-    title,
-    description,
+    title: process.env.NEXT_PUBLIC_META_TITLE,
+    description: process.env.NEXT_PUBLIC_META_DESCRIPTION,
 };
 
-// env vars need to be referenced as simple as possible because of the way next passes env vars to the front-end
-const primaryCode = process.env.NEXT_PUBLIC_PRIMARY_COLOUR;
-const secondaryCode = process.env.NEXT_PUBLIC_SECONDARY_COLOUR;
-
-console.log({
-    primaryCode,
-    secondaryCode
-})
-
-const primaryColour = `#${primaryCode}`;
-const secondaryColour = `#${secondaryCode}`;
+const primaryColour = `#${process.env.NEXT_PUBLIC_PRIMARY_COLOUR}`;
+const secondaryColour = `#${process.env.NEXT_PUBLIC_SECONDARY_COLOUR}`;
 
 const theme : ThemeConfig = {
     token: {
