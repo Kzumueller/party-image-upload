@@ -16,26 +16,30 @@ export const metadata: Metadata = {
     description: process.env.NEXT_PUBLIC_META_DESCRIPTION
 };
 
-const primary = `#${process.env.NEXT_PUBLIC_PRIMARY_COLOUR}`;
-const secondary = `#${process.env.NEXT_PUBLIC_SECONDARY_COLOUR}`;
+// env vars need to be referenced as simple as possible because of the way next passes env vars to the front-end
+const primaryCode = process.env.NEXT_PUBLIC_PRIMARY_COLOUR;
+const secondaryCode = process.env.NEXT_PUBLIC_SECONDARY_COLOUR;
+
+const primaryColour = `#${primaryCode}`;
+const secondaryColour = `#${secondaryCode}`;
 
 const theme : ThemeConfig = {
     token: {
-        colorPrimary: primary,
-        colorText: primary,
+        colorPrimary: primaryColour,
+        colorText: primaryColour,
         colorError: "#d44",
         colorTextPlaceholder: "#757575",
         colorBorder: "#bbb"
     },
     components: {
         Layout: {
-            headerBg: secondary,
+            headerBg: secondaryColour,
             colorBgLayout: "#f5f5f5"
         },
         Menu: {
-            darkItemBg: secondary,
-            darkItemColor: primary,
-            darkItemSelectedColor: secondary
+            darkItemBg: secondaryColour,
+            darkItemColor: primaryColour,
+            darkItemSelectedColor: secondaryColour
         }
     }
 }
