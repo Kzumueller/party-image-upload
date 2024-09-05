@@ -6,7 +6,7 @@
 
 - Head over to https://console.firebase.google.com/
 
-Store acquired credentials in env file
+- Store acquired credentials in env file (see env.template)
 
 ### Add a service account
 
@@ -101,7 +101,13 @@ service firebase.storage {
 
 - "Attach permissions" if asked to do so
 
-### Add access to secrets via gcloud
+### Manage Secrets via Google Secrets Manager
+
+- Create secrets as found in env.template
+
+- login in to gcloud with correct account?
+
+- Add access to secrets via CLI
 
 ```bash
 firebase apphosting:secrets:grantaccess --backend PROJECT_ID SECRET_NAME

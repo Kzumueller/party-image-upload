@@ -75,7 +75,7 @@ export const UsersTable = () => {
         loading={loading}
         columns={columns}
         dataSource={users}
-        scroll={{ x: "100svw" }}
+        scroll={{ x: "90svw" }}
         pagination={{
             hideOnSinglePage: true
         }}
