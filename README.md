@@ -1,40 +1,108 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Party Image Upload
 
-## Getting Started
+## Create a new instance
 
-First, run the development server:
+### Create a firebase project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Head over to https://console.firebase.google.com/
+
+Store acquired credentials in env file
+
+### Add a service account
+
+- Go to https://console.firebase.google.com/project/PROJECT_ID/settings/serviceaccounts/adminsdk
+
+- Hit "Generate new private key"
+
+- Place generated private key in env file as `GOOGLE_APPLICATION_CREDENTIALS` all in one line. 
+
+### Add a user
+
+- See https://console.firebase.google.com/project/PROJECT_ID/authentication/users
+
+- Select Email/password as provider then switch back to tab "Users" 
+
+### Add a database 
+
+- Generate a new database here: https://console.firebase.google.com/project/PROJECT_ID/firestore
+
+- Add collections `users` and `images`
+
+- Add a user document as follows:
+
+Document ID: user id from Firebase Auth
+
+```JSON
+
+{
+  "email": "first.last@gmail.com",
+  "permissions": {
+    "admin": true,
+    "download": true,
+    "present":  true,
+    "upload": true
+  }
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+where `permissions` is of type `map`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Set database rules
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+As follows:
 
-## Learn More
+```
+rules_version = '2';
 
-To learn more about Next.js, take a look at the following resources:
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /images/{document=**} {
+      allow read: if get(
+      	/databases/(default)/documents/users/$(request.auth.uid)).data.permissions.download;
+      allow write: if get(
+      	/databases/(default)/documents/users/$(request.auth.uid)).data.permissions.upload;
+    }
+    match /users/{userId} {
+    	allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null;
+    }
+    match /users/{document=**} {
+      allow read: if get(
+      	/databases/(default)/documents/users/$(request.auth.uid)).data.permissions.admin;
+      allow write: if get(
+      	/databases/(default)/documents/users/$(request.auth.uid)).data.permissions.admin;
+    }
+  }
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+and hit "Publish"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Set up storage
 
-## Deploy on Vercel
+- Head over to https://console.firebase.google.com/project/PROJECT_ID/storage
+- Click the button to set up storage
+- Set rules as follows:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+rules_version = '2';
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+    	allow read: if firestore.get(
+      	/databases/(default)/documents/users/$(request.auth.uid)).data.permissions.download;
+      allow write: if firestore.get(
+      	/databases/(default)/documents/users/$(request.auth.uid)).data.permissions.upload;
+    }
+  }
+}
+```
 
-## Grant access to secrets in Google Secret Manager
+- "Attach permissions" if asked to do so
 
-` firebase apphosting:secrets:grantaccess --backend <backend-name> <ENV_VAR>`
+### Add access to secrets via gcloud
+
+```bash
+firebase apphosting:secrets:grantaccess --backend PROJECT_ID SECRET_NAME
+```

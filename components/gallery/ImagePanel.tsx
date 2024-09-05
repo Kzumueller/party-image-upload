@@ -69,7 +69,7 @@ export const ImagePanel = ({ image }: Props) => {
             <SuperLine>
                 {t("%name at %date")
                     .replace("%name", image.uploaderName)
-                    .replace("%date", image.createdAt.toDate().toLocaleTimeString())
+                    .replace("%date", image.createdAt.toDate().toLocaleString())
                 }
             </SuperLine>
 

@@ -66,7 +66,7 @@ export const ImageManager = () => {
                 ref={fileDialogueRef}
                 className="h-0 w-0"
                 type="file"
-                accept=".jpg,.jpeg,.png,.ttif,.tif"
+                accept=".jpg,.jpeg,.png,.ttif,.tif,.webp"
                 multiple
                 onChange={(event) => parseImages(Array.from(event.target.files ?? []))}
 
