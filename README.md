@@ -101,6 +101,10 @@ service firebase.storage {
 
 - "Attach permissions" if asked to do so
 
+### Create Indexes 
+
+- Open Gallery and other pages and follow the URLs logged as errors to the console :D
+
 ### Manage Secrets via Google Secrets Manager
 
 - Create secrets as found in env.template

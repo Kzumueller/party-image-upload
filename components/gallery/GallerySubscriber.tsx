@@ -29,7 +29,9 @@ export const GallerySubscriber = () => {
     /** Subscription effect */
     useEffect(() => {
         return onSnapshot(imageQuery, snapshot => {
-            const images: Image[] = []
+            setTotal(0);
+
+            const images: Image[] = [];
             const tags: string[] = [];
             const uploaderNames: string[] = [];
 
@@ -51,7 +53,7 @@ export const GallerySubscriber = () => {
                 setUploaderNames(Array.from(new Set(uploaderNames)));
             }
 
-            getCountFromServer(imageCollection)
+            getCountFromServer(imageQuery)
                 .then(snapshot => setTotal(snapshot.data().count))
 
             setImages(images);
@@ -59,7 +61,7 @@ export const GallerySubscriber = () => {
         },
                 error => console.error(error)
         );
-    }, [imageQuery, setTags, setUploaderNames, setImages]);
+    }, [imageQuery, setTags, setUploaderNames, setImages, tag, uploaderName, imageCollection, setLoading, setTotal]);
 
     return <></>;
 }
